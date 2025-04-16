@@ -195,6 +195,15 @@ docker logs <container_name_or_id>
 
      This will persist the database data even after the container is stopped or removed.
 
+  If you encounter a problem while restarting the compose run this 
+  ```bash
+    docker-compose down --volumes --remove-orphans
+    docker-compose up --build 
+  ```
+  Avoid This If You Want Persistence
+
+        docker-compose down --volumes
+
 ## Conclusion
 
 This README provides an overview of the Railway Project, along with instructions on setting up, verifying, and troubleshooting the application and database. By following the steps outlined, you should be able to run the project successfully, manage the database, and verify user and booking data.
