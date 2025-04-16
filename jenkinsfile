@@ -1,0 +1,56 @@
+pipeline {
+    agent any
+
+    environment {
+        IMAGE_NAME = "suhailakthar/python-app" 
+        TAG = "${BUILD_ID}"
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git url:"https://github.com/suhailakthar18/python-app.git", branch: "main"
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                script {
+                    sh "docker build -t ${IMAGE_NAME}:${TAG} ."
+                }
+            }
+        }
+
+        stage('Push to Docker Hub') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                        sh """
+                        docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+                        docker push ${IMAGE_NAME}:${TAG}
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Run Container Locally') {
+            steps {
+                sh """
+                    docker-compose down --volumes --remove-orphans || true
+                    docker-compose pull
+                    docker-compose up --build
+                """
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ App deployed on my EC2 instance!'
+        }
+        failure {
+            echo '❌ Deployment failed.'
+        }
+    }
+}
