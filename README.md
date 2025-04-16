@@ -25,6 +25,7 @@ The Railway Project is a simple application designed to manage railway bookings,
 - **Docker Compose**: Used to manage multi-container Docker applications.
 - **SQL**: The project utilizes an SQL database for storing user data (e.g., login information).
 - **HTML**: Frontend pages are created using HTML.
+- **jenkins**: created a CICD Pipeline using jenkins
 
 ## Project Setup
 
@@ -212,6 +213,10 @@ If you just want to stop the services without data loss, use:
           docker compose stop
           or
           docker compose down --volumes=false
+
+## Jenkins
+
+  installed jenkins.it works on port 8080,Added jenkins to ubuntu and docker group
 
 ## Conclusion
 
