@@ -216,7 +216,77 @@ If you just want to stop the services without data loss, use:
 
 ## Jenkins
 
-  installed jenkins.it works on port 8080,Added jenkins to ubuntu and docker group
+  Installed jenkins.It works on port 8080,Added jenkins to ubuntu and docker group
+
+## 🔧 Step 1: Install Jenkins
+
+```bash
+sudo apt update
+sudo apt install openjdk-11-jdk -y
+wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+sudo sh -c 'echo deb https://pkg.jenkins.io/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt update
+sudo apt install jenkins -y
+
+✔️ Start and Enable Jenkins
+
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+
+🌐 Access Jenkins
+Open your browser:
+http://<your-server-ip>:8080
+
+Get the initial password:
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+🐳 Step 2: Install Docker and Docker Compose
+
+sudo apt install docker.io -y
+sudo apt install docker-compose -y
+
+👤 Step 3: Add Jenkins to Docker Group
+
+sudo usermod -aG docker jenkins
+sudo usermod -aG docker $USER
+sudo usermod -aG ubuntu jenkins
+sudo systemctl restart jenkins
+🔁 You may need to reboot your system or log out/log in to apply group changes.
+
+🔌 Step 4: Install Required Jenkins Plugins
+From Jenkins dashboard:
+
+Go to: Manage Jenkins → Manage Plugins → Install the following plugins:
+
+Git Plugin
+
+Docker Pipeline
+
+Docker Commons
+
+Docker API
+
+Pipeline
+
+Pipeline: Stage View
+
+Blue Ocean (optional, for UI)
+
+Credentials Binding Plugin
+
+🔑 Step 5: Create Docker Hub Credentials in Jenkins
+Go to: Manage Jenkins → Credentials → (global) → Add Credentials
+
+Kind: Username and password
+
+Username: Your Docker Hub username
+
+Password: Your Docker Hub password
+
+ID: dockerhub-credentials
+
+Description: Docker Hub login for pipeline
+
 
 ## Conclusion
 
