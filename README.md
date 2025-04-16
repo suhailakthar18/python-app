@@ -195,12 +195,6 @@ docker logs <container_name_or_id>
 
      This will persist the database data even after the container is stopped or removed.
 
-3. **Why can't I access the `/booking` page without logging in?**
-   - The `/booking` page is protected by a login check. If you are accessing it without being logged in, it should redirect you to the login page. If this isn't happening, make sure the session management is working correctly, and check the login logic in the `app.py`.
-
 ## Conclusion
 
 This README provides an overview of the Railway Project, along with instructions on setting up, verifying, and troubleshooting the application and database. By following the steps outlined, you should be able to run the project successfully, manage the database, and verify user and booking data.
-```
-
-This `README.md` file provides complete information about setting up the Railway Project, managing the database, and checking entries. It should serve as a comprehensive guide for anyone working with the project.
