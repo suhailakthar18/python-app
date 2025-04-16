@@ -55,14 +55,13 @@ def login():
 
 @app.route("/logout")
 def logout():
-    session.pop("user", None)  # Remove the user from session
+    session.pop("user", None)
     return redirect("/login")
 
 @app.route("/booking", methods=["GET", "POST"])
 def booking():
-    if "user" not in session:  # Check if the user is logged in
-        print("User is not logged in, redirecting to login.")
-        return redirect("/login")  # Redirect to login page if not logged in
+    if "user" not in session:
+        return redirect("/login")
 
     result = ""
     if request.method == "POST":
@@ -70,7 +69,9 @@ def booking():
         time = request.form["departure_time"]
         source = request.form["source"]
         destination = request.form["destination"]
-        railway = Railway(train_no, time, source, destination)
+        
+        # ✅ FIXED: Passing mysql as the first argument
+        railway = Railway(mysql, train_no, time, source, destination)
 
         action = request.form["action"]
         if action == "Book":

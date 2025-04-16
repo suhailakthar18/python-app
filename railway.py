@@ -32,7 +32,6 @@ class Railway:
             return "No booking found for this train."
 
     def fare(self):
-        # Simple dummy fare logic based on distance or random value
         base_fare = 100
         fare = base_fare + len(self.source + self.destination) * 2
         return f"Estimated fare from {self.source} to {self.destination} is ₹{fare}."
