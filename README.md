@@ -202,7 +202,16 @@ docker logs <container_name_or_id>
   ```
   Avoid This If You Want Persistence
 
-        docker-compose down --volumes
+        docker-compose down --volumes  
+
+        
+Use docker compose down -v only if you want to remove everything, including volumes.    
+If you just want to stop the services without data loss, use:
+
+
+          docker compose stop
+          or
+          docker compose down --volumes=false
 
 ## Conclusion
 
