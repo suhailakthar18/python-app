@@ -5,7 +5,7 @@
 The Railway Project is a simple application designed to manage railway bookings, with functionalities like user registration, login, and password reset. This project aims to demonstrate the use of Docker, Docker Compose, and other relevant technologies for containerizing and deploying the application.
 
 
-## 🚆 Railway Booking System – Infrastructure-as-Code Project
+## 🚆 Railway Booking System 
 Tech Stack: Python, HTML, SQL, Docker, Docker Compose, Terraform, AWS (EC2, ALB, Route 53), Git
 
 Description:
@@ -13,8 +13,6 @@ Description:
 Developed a Railway Booking System using Python (Flask) for the backend, HTML for the frontend, and MySQL for data storage.
 
 Containerized the application using Docker and managed multi-container deployment using Docker Compose.
-
-Used Terraform to provision and manage AWS infrastructure as code, including EC2 instances, security groups, and VPC configuration.
 
 Configured an Application Load Balancer (ALB) to ensure high availability and routing of traffic to containerized services.
 
