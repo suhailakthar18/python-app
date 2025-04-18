@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from railway import Railway
 
 app = Flask(__name__)
-app.secret_key = "your_secret_key"  # Change this to a secure key in production
+app.secret_key = "your_secret_key"  
 
 # MySQL Configuration
 app.config['MYSQL_HOST'] = 'db'
