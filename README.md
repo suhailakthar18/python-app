@@ -20,6 +20,38 @@ Set up Route 53 to create an A Record pointing to the ALB, enabling domain-based
 
 Version control and CI/CD handled via Git.
 
+ ## Terraform Infrastructure as Code (IaC)
+      To provision and manage the infrastructure for the Railway Booking System, Terraform was used to automate the setup on AWS.
+
+🧱 What I Did Using Terraform:
+     Defined Infrastructure in Code:
+
+     Wrote main.tf, variables.tf, and outputs.tf files to manage resources declaratively.
+
+     Provisioned AWS Resources:
+
+    VPC, Subnets, and Internet Gateway for networking.
+
+    Security Groups to allow traffic for SSH (port 22), HTTP (port 80), HTTPS (port 443), Jenkins (port 8080).
+
+    EC2 Instance:
+
+    Ubuntu-based EC2 instance provisioned with a user_data script to install and configure Jenkins, Docker, and Docker Compose.
+
+    Attached a public IP and a key pair for SSH access.
+
+    Automated Application Setup via User Data:
+
+    Used user_data to:
+
+    Install system updates and essential packages.
+
+    Install Jenkins and start the service.
+ 
+    Install Docker and Docker Compose.
+
+    Add Jenkins and Ubuntu users to the Docker group.
+
 ## Project Setup
 
 ### Clone the Repository
