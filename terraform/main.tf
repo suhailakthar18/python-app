@@ -77,7 +77,7 @@ resource "aws_security_group" "ec2_sg" {
 
 resource "aws_key_pair" "deployer" {
   key_name   = "my-key"
-  public_key = file("${path.module}/../my-key.pub")
+  public_key = file("${path.module}/../../my-key.pub")
 
 }
 
@@ -88,6 +88,55 @@ resource "aws_instance" "web" {
   subnet_id     = aws_subnet.public.id
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
   key_name               = aws_key_pair.deployer.key_name
+  user_data = <<-EOF
+              #!/bin/bash
+
+              # Update packages
+              sudo apt-get update -y
+
+              # Install dependencies for Docker
+              sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+
+              # Add Docker’s official GPG key
+              curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+              # Set up Docker stable repository
+              sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+              # Install Docker
+              sudo apt-get update -y
+              sudo apt-get install -y docker-ce
+
+              # Start Docker service
+              sudo systemctl start docker
+              sudo systemctl enable docker
+
+              # Install Docker Compose
+              sudo curl -L "https://github.com/docker/compose/releases/download/$(curl -s https://api.github.com/repos/docker/compose/releases/latest | jq -r .tag_name)/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+              # Make Docker Compose executable
+              sudo chmod +x /usr/local/bin/docker-compose
+
+              # Install Jenkins
+              wget -q -O - https://pkg.jenkins.io/jenkins.io.key | sudo apt-key add -
+              sudo sh -c 'echo "deb http://pkg.jenkins.io/debian/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/jenkins.list'
+              sudo apt-get update -y
+              sudo apt-get install -y jenkins
+
+              # Add Jenkins to Docker and Ubuntu groups
+              sudo usermod -aG docker jenkins
+              sudo usermod -aG docker $USER
+              sudo usermod -aG ubuntu jenkins
+
+              # Restart Jenkins service to apply changes
+              sudo systemctl restart jenkins
+
+              # Verify installation of Docker, Docker Compose, and Jenkins
+              docker --version
+              docker-compose --version
+              java -version
+              jenkins --version
+              EOF
 
   tags = {
     Name = "UbuntuEC2"
