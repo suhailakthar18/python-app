@@ -4,28 +4,23 @@
 
 The Railway Project is a simple application designed to manage railway bookings, with functionalities like user registration, login, and password reset. This project aims to demonstrate the use of Docker, Docker Compose, and other relevant technologies for containerizing and deploying the application.
 
-## Features
 
-- **User Management**:  
-  - User registration and login functionality.
-  - Password reset functionality.
-  
-- **HTML Templates**:  
-  The project includes the following HTML templates for the frontend:
-  - `index.html`: The homepage of the application.
-  - `login.html`: Login page for user authentication.
-  - `register.html`: Registration page for new users.
-  - `reset_password.html`: Page for users to reset their password.
+## 🚆 Railway Booking System – Infrastructure-as-Code Project
+Tech Stack: Python, HTML, SQL, Docker, Docker Compose, Terraform, AWS (EC2, ALB, Route 53), Git
 
-## Technologies Used
+Description:
 
-- **Python**: The backend of the project is built with Python.
-- **Flask**: For creating web routes and serving HTML templates.
-- **Docker**: Containerization of the application using Docker.
-- **Docker Compose**: Used to manage multi-container Docker applications.
-- **SQL**: The project utilizes an SQL database for storing user data (e.g., login information).
-- **HTML**: Frontend pages are created using HTML.
-- **jenkins**: created a CICD Pipeline using jenkins
+Developed a Railway Booking System using Python (Flask) for the backend, HTML for the frontend, and MySQL for data storage.
+
+Containerized the application using Docker and managed multi-container deployment using Docker Compose.
+
+Used Terraform to provision and manage AWS infrastructure as code, including EC2 instances, security groups, and VPC configuration.
+
+Configured an Application Load Balancer (ALB) to ensure high availability and routing of traffic to containerized services.
+
+Set up Route 53 to create an A Record pointing to the ALB, enabling domain-based access to the application.
+
+Version control and CI/CD handled via Git.
 
 ## Project Setup
 
