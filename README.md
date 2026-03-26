@@ -1,8 +1,3 @@
-Your content is good — just formatting is broken. Here is the **properly formatted, clean README.md** 👇
-
----
-
-````markdown
 # 🚆 Railway Booking System
 
 ## 📌 Overview
@@ -10,7 +5,7 @@ The Railway Booking System is a web application built using Python (Flask) that 
 
 This project demonstrates a complete **DevOps implementation**, including containerization, CI/CD automation, infrastructure provisioning, and Kubernetes testing.
 
----
+
 
 ## 🚀 DevOps Implementation
 
@@ -21,7 +16,7 @@ This project demonstrates a complete **DevOps implementation**, including contai
 - Cloud: AWS (EC2)  
 - Version Control: Git  
 
----
+
 
 ## 🏗️ Architecture Overview
 
@@ -31,7 +26,6 @@ This project demonstrates a complete **DevOps implementation**, including contai
 - Flask Application (Backend)  
 - MySQL Database  
 
----
 
 ## 🔄 CI/CD Pipeline Flow
 
@@ -42,7 +36,7 @@ This project demonstrates a complete **DevOps implementation**, including contai
 5. Application is deployed on EC2  
 6. Application is accessed via public IP  
 
----
+
 
 ## 📦 Features
 
@@ -51,14 +45,14 @@ This project demonstrates a complete **DevOps implementation**, including contai
 - Booking management  
 - MySQL database integration  
 
----
+
 
 ## 🐳 Docker Setup
 
 ### Build Docker Image
 ```bash
 docker build -t railway-project .
-````
+
 
 ### Run with Docker Compose
 
@@ -70,8 +64,7 @@ docker-compose up --build
 
 [http://localhost:5000](http://localhost:5000)
 
----
----
+
 
 ## ☸️ Kubernetes (Testing with Kind)
 
@@ -79,9 +72,7 @@ docker-compose up --build
 * Created manifests for Deployment and Service
 * Verified application inside the cluster
 
----
 
----
 
 ## ☁️ Terraform (Infrastructure as Code)
 
@@ -97,7 +88,6 @@ Terraform is used to provision AWS infrastructure.
 - Installed Docker & Docker Compose  
 - Configured system for deployment  
 
----
 
 ## ⚙️ Jenkins CI/CD
 
@@ -105,7 +95,7 @@ Terraform is used to provision AWS infrastructure.
 - Pipeline defined using `Jenkinsfile`  
 - Automated build and deployment workflow  
 
----
+
 
 ## 🗄️ Database Setup
 
@@ -123,11 +113,11 @@ USE railway_system;
 SELECT * FROM users;
 ```
 
----
+
 
 ## 📁 Project Structure
 
-```
+
 .
 ├── Dockerfile
 ├── docker-compose.yaml
@@ -138,9 +128,7 @@ SELECT * FROM users;
 ├── requirements.txt
 ├── init.sql
 └── templates/
-```
 
----
 
 ## 🛠️ Challenges Faced
 
@@ -148,7 +136,7 @@ SELECT * FROM users;
 * Terraform provisioning errors → fixed by correcting AMI and security group rules
 * Jenkins permission issues → resolved by adding Jenkins to Docker group
 
----
+
 
 ## 🚀 Future Improvements
 
@@ -158,10 +146,6 @@ SELECT * FROM users;
 * Add monitoring using Prometheus & Grafana
 * Deploy on managed Kubernetes (EKS)
 
----
 
-```
-
----
 
 
