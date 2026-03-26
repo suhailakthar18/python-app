@@ -1,318 +1,167 @@
-# Railway Project
+Your content is good — just formatting is broken. Here is the **properly formatted, clean README.md** 👇
 
-## Overview
+---
 
-The Railway Project is a simple application designed to manage railway bookings, with functionalities like user registration, login, and password reset. This project aims to demonstrate the use of Docker, Docker Compose, and other relevant technologies for containerizing and deploying the application.
+````markdown
+# 🚆 Railway Booking System
 
+## 📌 Overview
+The Railway Booking System is a web application built using Python (Flask) that allows users to register, log in, and manage bookings.  
 
-## 🚆 Railway Booking System 
-Tech Stack: Python, HTML, SQL, Docker, Docker Compose, Terraform, AWS (EC2, ALB, Route 53), Git
+This project demonstrates a complete **DevOps implementation**, including containerization, CI/CD automation, infrastructure provisioning, and Kubernetes testing.
 
-Description:
+---
 
-Developed a Railway Booking System using Python (Flask) for the backend, HTML for the frontend, and MySQL for data storage.
+## 🚀 DevOps Implementation
 
-Containerized the application using Docker and managed multi-container deployment using Docker Compose.
+- CI/CD: Jenkins  
+- Containerization: Docker & Docker Compose  
+- Orchestration: Kubernetes (tested locally using Kind)  
+- Infrastructure as Code: Terraform  
+- Cloud: AWS (EC2)  
+- Version Control: Git  
 
-Configured an Application Load Balancer (ALB) to ensure high availability and routing of traffic to containerized services.
+---
 
-Set up Route 53 to create an A Record pointing to the ALB, enabling domain-based access to the application.
+## 🏗️ Architecture Overview
 
-Version control and CI/CD handled via Git.
+- User → Public IP → EC2 Instance → Docker Containers  
 
- ## Terraform Infrastructure as Code (IaC)
-      To provision and manage the infrastructure for the Railway Booking System, Terraform was used to automate the setup on AWS.
+### Services:
+- Flask Application (Backend)  
+- MySQL Database  
 
-🧱 What I Did Using Terraform:
-     Defined Infrastructure in Code:
+---
 
-     Wrote main.tf, variables.tf, and outputs.tf files to manage resources declaratively.
+## 🔄 CI/CD Pipeline Flow
 
-     Provisioned AWS Resources:
+1. Developer pushes code to GitHub  
+2. Jenkins pipeline is triggered  
+3. Application is built and tested  
+4. Docker image is created  
+5. Application is deployed on EC2  
+6. Application is accessed via public IP  
 
-    VPC, Subnets, and Internet Gateway for networking.
+---
 
-    Security Groups to allow traffic for SSH (port 22), HTTP (port 80), HTTPS (port 443), Jenkins (port 8080).
+## 📦 Features
 
-    EC2 Instance:
+- User registration & login  
+- Password reset functionality  
+- Booking management  
+- MySQL database integration  
 
-    Ubuntu-based EC2 instance provisioned with a user_data script to install and configure Jenkins, Docker, and Docker Compose.
+---
 
-    Attached a public IP and a key pair for SSH access.
+## 🐳 Docker Setup
 
-    Automated Application Setup via User Data:
+### Build Docker Image
+```bash
+docker build -t railway-project .
+````
 
-    Used user_data to:
-
-    Install system updates and essential packages.
-
-    Install Jenkins and start the service.
- 
-    Install Docker and Docker Compose.
-
-    Add Jenkins and Ubuntu users to the Docker group.
-
-## Project Setup
-
-### Clone the Repository
-
-To get started, clone the repository to your local machine:
+### Run with Docker Compose
 
 ```bash
-git clone https://github.com/your-username/railway_project.git
-cd railway_project
+docker-compose up --build
 ```
 
-### Requirements
+### Access Application
 
-Ensure you have the following tools installed:
-- Docker
-- Docker Compose
+[http://localhost:5000](http://localhost:5000)
 
-To install Docker on Ubuntu:
+---
+---
+
+## ☸️ Kubernetes (Testing with Kind)
+
+* Tested the application in a local Kubernetes environment using Kind (Kubernetes IN Docker)
+* Created manifests for Deployment and Service
+* Verified application inside the cluster
+
+---
+
+---
+
+## ☁️ Terraform (Infrastructure as Code)
+
+Terraform is used to provision AWS infrastructure.
+
+### Resources Created:
+- EC2 Instance (Ubuntu)  
+- Security Groups (Ports: 22, 80, 8080)  
+- Basic networking setup  
+
+### Automation using user_data:
+- Installed Jenkins  
+- Installed Docker & Docker Compose  
+- Configured system for deployment  
+
+---
+
+## ⚙️ Jenkins CI/CD
+
+- Jenkins installed on EC2 instance  
+- Pipeline defined using `Jenkinsfile`  
+- Automated build and deployment workflow  
+
+---
+
+## 🗄️ Database Setup
+
+* MySQL is used as the database
+* Tables are automatically created using `init.sql` during container startup
+
+### Verify Data (Optional)
 
 ```bash
-sudo apt install docker.io
-sudo usermod -aG docker $$USER && newgrp docker
+docker exec -it <mysql-container> mysql -u root -p
 ```
 
-To install Docker Compose on Ubuntu:
-
-```bash
-sudo apt install docker-compose
+```sql
+USE railway_system;
+SELECT * FROM users;
 ```
 
-### File Structure
+---
 
-```plaintext
-railway_project/
+## 📁 Project Structure
+
+```
+.
 ├── Dockerfile
-├── app.py
 ├── docker-compose.yaml
-├── init.sql
-├── railway.py
+├── terraform/
+├── kubernetes/
+├── Jenkinsfile
+├── app.py
 ├── requirements.txt
+├── init.sql
 └── templates/
-    ├── index.html
-    ├── login.html
-    ├── register.html
-    └── reset_password.html
 ```
 
-### Docker Setup
+---
 
-1. **Build the Docker Image**:  
-   First, build the Docker image using the `Dockerfile`:
+## 🛠️ Challenges Faced
 
-   ```bash
-   docker build -t railway-project .
-   ```
+* Docker container communication issues → resolved using Docker Compose networking
+* Terraform provisioning errors → fixed by correcting AMI and security group rules
+* Jenkins permission issues → resolved by adding Jenkins to Docker group
 
-2. **Run with Docker Compose**:  
-   Use Docker Compose to start the application and the required services:
+---
 
-   ```bash
-   docker-compose up --build
-   ```
+## 🚀 Future Improvements
 
-3. **Access the Application**:  
-   After starting the application with Docker Compose, you can access it via `http://localhost:5000`.
+* Add Application Load Balancer (ALB) for high availability
+* Configure Route53 for domain-based access
+* Implement auto-scaling
+* Add monitoring using Prometheus & Grafana
+* Deploy on managed Kubernetes (EKS)
 
-## Database Configuration and Verification
+---
 
-### Database Setup
-
-The project uses MySQL as the database to store user credentials and booking details. The database is initialized using an SQL script (`init.sql`) to create the necessary tables.
-
-The `init.sql` file is executed automatically when you run the MySQL container via Docker Compose, ensuring that the database and tables are created.
-
-### How to Verify and Check Database Entries
-
-1. **Access MySQL from a Container**:
-   To verify and check the entries in the database, you can connect to the MySQL container directly.
-
-   - First, list the running containers:
-
-     ```bash
-     docker ps
-     ```
-
-   - Get the container ID or name for the MySQL container (in the `docker-compose.yml`, the container name is usually `db`).
-   
-   - Enter the MySQL container:
-
-     ```bash
-     docker exec -it <container_name_or_id> bash
-     ```
-
-   - Once inside the container, log in to MySQL:
-
-     ```bash
-     mysql -u root -p
-     ```
-
-   - Enter the MySQL root password (`yourpassword` in this case) when prompted.
-
-2. **Verify Database**:
-   - Select the database:
-
-     ```sql
-     USE railway_system;
-     ```
-
-   - Check the `users` table to see if the entries exist:
-
-     ```sql
-     SELECT * FROM users;
-     ```
-
-   - Check the `bookings` table to see if any booking records exist:
-
-     ```sql
-     SELECT * FROM bookings;
-     ```
-
-3. **Check Specific User or Booking**:
-   - To check if a specific user exists:
-
-     ```sql
-     SELECT * FROM users WHERE username='Suhail';
-     ```
-
-   - To check bookings made by a user:
-
-     ```sql
-     SELECT * FROM bookings WHERE username='Suhail';
-     ```
-
-4. **Exit MySQL and the Container**:
-   - To exit MySQL:
-
-     ```sql
-     exit;
-     ```
-
-   - To exit the container:
-
-     ```bash
-     exit;
-     ```
-
-### Troubleshooting Database Issues
-
-- If you encounter issues with the database not being created or tables not being initialized, ensure that:
-  - The `init.sql` script is executed when the container is started.
-  - There are no errors in the MySQL container logs related to database creation.
-
-You can view logs with the following command:
-
-```bash
-docker logs <container_name_or_id>
 ```
 
-## Troubleshooting and FAQ
-
-  To ensure that data is not lost when you restart the container, you need to use Docker volumes. You can define a volume in the `docker-compose.yml` file under the `db` service like this:
-
-     ```yaml
-     volumes:
-       - mysql_data:/var/lib/mysql
-     ```
-
-     This will persist the database data even after the container is stopped or removed.
-
-  If you encounter a problem while restarting the compose run this 
-  ```bash
-    docker-compose down --volumes --remove-orphans
-    docker-compose up --build 
-  ```
-  Avoid This If You Want Persistence
-
-        docker-compose down --volumes  
-
-        
-Use docker compose down -v only if you want to remove everything, including volumes.    
-If you just want to stop the services without data loss, use:
+---
 
 
-          docker compose stop
-          or
-          docker compose down --volumes=false
-
-## Jenkins
-
-  Installed jenkins.It works on port 8080,Added jenkins to ubuntu and docker group
-
-## 🔧 Step 1: Install Jenkins
-
-```bash
-sudo apt update
-sudo apt install openjdk-11-jdk -y
-wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
-sudo sh -c 'echo deb https://pkg.jenkins.io/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
-sudo apt update
-sudo apt install jenkins -y
-
-✔️ Start and Enable Jenkins
-
-sudo systemctl start jenkins
-sudo systemctl enable jenkins
-
-🌐 Access Jenkins
-Open your browser:
-http://<your-server-ip>:8080
-
-Get the initial password:
-sudo cat /var/lib/jenkins/secrets/initialAdminPassword
-
-🐳 Step 2: Install Docker and Docker Compose
-
-sudo apt install docker.io -y
-sudo apt install docker-compose -y
-
-👤 Step 3: Add Jenkins to Docker Group
-
-sudo usermod -aG docker jenkins
-sudo usermod -aG docker $USER
-sudo usermod -aG ubuntu jenkins
-sudo systemctl restart jenkins
-🔁 You may need to reboot your system or log out/log in to apply group changes.
-
-🔌 Step 4: Install Required Jenkins Plugins
-From Jenkins dashboard:
-
-Go to: Manage Jenkins → Manage Plugins → Install the following plugins:
-
-Git Plugin
-
-Docker Pipeline
-
-Docker Commons
-
-Docker API
-
-Pipeline
-
-Pipeline: Stage View
-
-Blue Ocean (optional, for UI)
-
-Credentials Binding Plugin
-
-🔑 Step 5: Create Docker Hub Credentials in Jenkins
-Go to: Manage Jenkins → Credentials → (global) → Add Credentials
-
-Kind: Username and password
-
-Username: Your Docker Hub username
-
-Password: Your Docker Hub password
-
-ID: dockerhub-credentials
-
-Description: Docker Hub login for pipeline
-
-
-## Conclusion
-
-This README provides an overview of the Railway Project, along with instructions on setting up, verifying, and troubleshooting the application and database. By following the steps outlined, you should be able to run the project successfully, manage the database, and verify user and booking data.
